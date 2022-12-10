@@ -32,9 +32,9 @@ class LowLevel extends StatefulWidget {
 }
 
 class _LowLevelState extends State<LowLevel> {
-
   late BuildContext _buildContext;
-  Queue<BuildContext> _queue = Queue();
+
+  final Queue<BuildContext> _queue = Queue();
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +48,8 @@ class _LowLevelState extends State<LowLevel> {
       },
       child: Scaffold(
       body: Container(
-        height: double.maxFinite,
-        width: double.maxFinite,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Container(
@@ -63,7 +63,7 @@ class _LowLevelState extends State<LowLevel> {
                           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                           child: Container(
                               decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.0)
+                                  //color: Colors.white.withOpacity(0.0)
                               )
                           )
                       ),
@@ -74,10 +74,50 @@ class _LowLevelState extends State<LowLevel> {
                   _buildContext = context;
                   return GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => CatChooseScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CatChooseScreen()));
                       _queue.addLast(context);
                     },
                     child: Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 80,
+                        height: MediaQuery.of(context).size.height - 300,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: Column(
+                            children: [
+                              const Text('Добро пожаловать!', style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w300,
+                                fontSize: 20
+                              ),),
+                              Padding(padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                                     child: ElevatedButton(onPressed: () {
+                                       Navigator.of(_buildContext).push(MaterialPageRoute(builder: (context) => const CatChooseScreen()));
+                                     },child: const Text('Some button')),
+
+                                     /*child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(_buildContext).push(MaterialPageRoute(builder: (context) => const CatChooseScreen()));
+                                          _queue.addLast(_buildContext);
+                                        }
+                                    ),*/
+
+                                    
+                                  
+                              /*ElevatedButton(onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CatChooseScreen()));
+                              },child: const Text('Some button')),*/)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    /*Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,9 +154,7 @@ class _LowLevelState extends State<LowLevel> {
                                             });
                                           },
                                         )
-                                      /*ElevatedButton(onPressed: () {
-                                          //Navigator.push(context, MaterialPageRoute(builder: (context) => const CatChooseScreen()));
-                                        }, child: const Text('Категорировать маршрут'))*/),
+                                      ),
                                     const Padding(
                                       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                                       child: Text('Войти в сеть'),
@@ -127,7 +165,7 @@ class _LowLevelState extends State<LowLevel> {
                             )
                           ],
                         ),
-                      ),
+                      ),*/
                   );
                 });
               },

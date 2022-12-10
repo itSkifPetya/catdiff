@@ -14,22 +14,17 @@ class _CatChooseScreenState extends State<CatChooseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
+    return Container(
               height: 250,
-              width: 310,
+              width: MediaQuery.of(context).size.width - 80,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 color: Colors.white
               ),
-            )
-          ],
-        ),
-      ),
+              child: Center(
+                child: Text('Welcome to CatChooseScreen still not fragment..'),
+              ),
+
     );
   }
 }
